@@ -78,14 +78,15 @@ pub fn main() !void {
         rl.drawRectangleV(.{ .x = posX, .y = posY }, .{ .x = size, .y = size }, .blue);
         rl.drawFPS(5, 5); // Show FPS for testing
 
-
         // Text to display
-        var buf: [64]u8 = undefined; var txt_size: u8 = 20;
+        var buf: [64]u8 = undefined;
+        var txt_size: u8 = 20;
         _ = &buf;
         var text = try std.fmt.bufPrintZ(&buf, "Niveau {}", .{level});
 
         // Check if the player finished all the levels
-        var game_over = map.game_over; _ = &game_over;
+        var game_over = map.game_over;
+        _ = &game_over;
         if (game_over) {
             text = try std.fmt.bufPrintZ(&buf, "Bravo! Tu as gagné!", .{});
             txt_size = 40;

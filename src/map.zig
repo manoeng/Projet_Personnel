@@ -164,7 +164,21 @@ pub fn Levels(id: u8, stX: *f32, stY: *f32) Grid {
             matrix[1][1] = 2;
         },
         6 => {
-            
+            stX.* = 18 * size; stY.* = 10 * size;
+            for (0..15) |i| matrix[3][i] = 1;
+            for (2..20) |i| matrix[7][i] = 1;
+            for (8..12) |y| {
+                for (2..14) |x| {
+                    matrix[y-4][5] = 1; matrix[y-8][16] = 1; matrix[3][y+7] = 1;
+                    if (@rem(x, 2) == 0) {
+                        matrix[y][x] = 2;
+                        if (@rem(x, 4) == 0) matrix[11][x] = 0 else matrix[8][x] = 0;
+                    } 
+                }
+            }
+            matrix[1][1] = 3; matrix[11][19] = 3; matrix[5][5] = 3; matrix[3][19] = 3;
+            matrix[6][19] = 1;
+            matrix[0][19] = 4;
         },
         else => { stX.* = (screen_width - size) / 2; stY.* = (screen_height - size) / 2; game_over = true; },
     }
