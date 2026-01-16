@@ -2,7 +2,7 @@
 
 ## Étape 1: Installer Zig
 
-Installer le langage à [Zig Download](https://ziglang.org/download/)
+Installer le langage à [Zig Download](https://ziglang.org/download/).
 La version doit être suppérieure ou égale à 0.15.1.
 
 ## Étape 2: Installer Raylib-Zig
