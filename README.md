@@ -17,6 +17,8 @@ zig fetch --save git+https://github.com/raylib-zig/raylib-zig#devel
 
 ## Assurez-vous que chaque fichier et son contenu soit identique aux fichiers présents dans se répertoire
 
+Le fichier test.zig ne sert à rien. C'est simplement l'endroit où je testais de nouvelles idées et concepts.
+
 Pour jouer au jeu, entrez la ligne suivant dans le terminal bash:
 ```zig build run```
 
