@@ -18,15 +18,7 @@ fn array() ![]u8 {
 }
 
 pub fn main() !void {
-    const boolean: bool = true;
-    const arr = try array();
-    _ = arr;
-
-    if (1 == 2 or boolean) {
-        std.debug.print("YES\n", .{});
-    }
+    const arr = try array(); 
+    _ = arr; 
 }
 
-fn addNum(input:*i8) void {
-    input.* += 10;
-}
