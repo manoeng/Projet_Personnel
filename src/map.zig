@@ -14,11 +14,11 @@ pub var game_over: bool = false; // When game ends
 
 // Main logic struct
 pub const Map = struct {
-    data: Grid,
+    data: Grid,// {{{
     tile_size: f32 = size,
 
     pub fn draw(self: Map) void {
-        for (self.data, 0..) |row, y| {
+        for (self.data, 0..) |row, y| {// {{{
             for (row, 0..) |tile, x| {
                 const fx: f32 = @floatFromInt(x);
                 const fy: f32 = @floatFromInt(y);
@@ -35,22 +35,22 @@ pub const Map = struct {
                     else => {},
                 }
             }
-        }
+        }// }}}
     }
 
     // This checks if a SPECIFIC point (x, y) is inside a solid tile
     pub fn getTileAt(self: Map, x: f32, y: f32) u8 {
-        if (x < 0 or x > screen_width or y < 0 or y > screen_height) {
+        if (x < 0 or x > screen_width or y < 0 or y > screen_height) {// {{{
             return 1;
         }
         const ix: usize = @intFromFloat(x / self.tile_size);
         const iy: usize = @intFromFloat(y / self.tile_size);
-        return self.data[iy][ix];
+        return self.data[iy][ix];// }}}
     }
 
     // Logic for pushing and moving
     pub fn updateLogic(self: *Map, px: f32, py: f32, nextX: f32, nextY: f32) struct { x: f32, y: f32, win: bool } {
-        // Check all 4 corners of the player's box
+        // Check all 4 corners of the player's box{{{
         const pad: f32 = 2; // Padding to make the hitbox smaller
         const corners: [4][2]f32 = .{
             .{ nextX + pad, nextY + pad }, // Top Left
@@ -71,7 +71,7 @@ pub const Map = struct {
             const iy: usize = @intFromFloat(c[1] / self.tile_size);
 
             if (tile == 2) {
-                // Determine push direction based on movement
+                // Determine push direction based on movement{{{
                 const dx: i32 = if (nextX > px) 1 else if (nextX < px) -1 else 0;
                 const dy: i32 = if (nextY > py) 1 else if (nextY < py) -1 else 0;
 
@@ -85,11 +85,11 @@ pub const Map = struct {
                         return .{ .x = nextX, .y = nextY, .win = false };
                     }
                 }
-                return .{ .x = px, .y = py, .win = false }; // Block is stuck
+                return .{ .x = px, .y = py, .win = false }; // Block is stuck}}}
             }
 
             if (tile == 3) {
-                for (self.data, 0..) |row, y| {
+                for (self.data, 0..) |row, y| {// {{{
                     for (row, 0..) |target_tile, x| {
                         // Find another portal
                         if (target_tile == 3 and (x != ix or y != iy)) {
@@ -103,16 +103,16 @@ pub const Map = struct {
                             return .{ .x = newX, .y = newY, .win = false };
                         }
                     }
-                }
+                }// }}}
             }
         }
-        return .{ .x = nextX, .y = nextY, .win = false };
-    }
+        return .{ .x = nextX, .y = nextY, .win = false };// }}}
+    }// }}}
 };
 
 // Where the level design is created
 pub fn Levels(id: u8, stX: *f32, stY: *f32) Grid {
-    // Create an empty matrix (every position is set to 0)
+    // Create an empty matrix (every position is set to 0){{{
     var matrix: Grid = .{ .{0} ** map_width } ** map_height;
     _ = &matrix; // Ensure there is no error if the variable is never changed
 
@@ -182,5 +182,5 @@ pub fn Levels(id: u8, stX: *f32, stY: *f32) Grid {
         },
         else => { stX.* = (screen_width - size) / 2; stY.* = (screen_height - size) / 2; game_over = true; },
     }
-    return matrix;
+    return matrix;// }}}
 }

@@ -16,7 +16,7 @@ var posY: f32 = 0;
 const speed: f32 = 300;
 
 pub fn main() !void {
-    // Init window
+    // Init window{{{
     rl.initWindow(screen_width, screen_height, "Projet Personnel");
     defer rl.closeWindow(); // Close window when function is out of scope
 
@@ -94,7 +94,7 @@ pub fn main() !void {
 
         const txt_width = rl.measureText(text, txt_size);
         rl.drawText(text, screen_width / 2 - @divTrunc(txt_width, 2), 5, txt_size, .black);
-    }
+    }// }}}
 }
 
 fn handleWin(game_map: *Map, px: *f32, py: *f32, level_id: *u8) void {
